@@ -45,6 +45,36 @@ arr6.splice(2-1, 0, 'a', 'b');
 arr6.splice(7-1, 0, 'c');
 arr6.splice(arr6.length-1+1, 0, 'e');
 console.log("now arr is: "+arr6);
+//
+console.log('2nd version-try without splice');
+function procArr1D_swap(data, N1, N2){
+	let Q=data.length;
+	if(N1>=1 && N1<=Q && N1>=1 && N2<=Q){
+		let buf=data[N1-1];
+		data[N1-1]=data[N2-1];
+		data[N2-1]=buf;
+	}
+	return data;
+}
+function procArr1D_ins(where, what, N){//no splice used, changes array-param
+	let Q=where.length;
+	if(N>=1 && N<=Q){
+		where.push(what);
+		Q=where.length;
+		for(let i=Q-1; i>=N; i--){
+			procArr1D_swap(where, i+1, i);
+		}
+	}
+	return where;
+}
+arr6=[1, 2, 3, 4, 5];
+procArr1D_ins(arr6, 'a', 2);
+console.log("after ins a arr is: "+arr6);
+procArr1D_ins(arr6, 'b', 3);
+console.log("after ins b arr is: "+arr6);
+procArr1D_ins(arr6, 'c', arr6.length);
+arr6.push('e');
+console.log("now arr is: "+arr6);
 console.log("Task 4");//-----------------------------------------------------------
 //Створити масив [1, 2, 3, 4, 5]. За допомогою методу splice записати у новий масив елементи [2, 3, 4].
 let arr4= [1, 2, 3, 4, 5];
